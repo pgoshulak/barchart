@@ -13,6 +13,31 @@
   <div id="barchart-1"></div>
 </body>
 <script>
-  barchart([1,2,3,4,5], {}, 'barchart-1')
+  barchart([
+    {
+      label: 'Alpha',
+      value: 1
+    },
+    {
+      label: 'Bravo',
+      value: 2
+    },
+    {
+      label: 'Charlie',
+      value: 3
+    },
+    {
+      label: 'Delta',
+      value: 4
+    },
+    {
+      label: 'Echo',
+      value: 5
+    },
+  ],
+  {
+    title: 'Bar chart'
+  },
+  'barchart-1')
 </script>
 </html>
