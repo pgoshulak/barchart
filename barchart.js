@@ -1,5 +1,5 @@
 function createTitle (titleText) {
-  return $('<h4></h4>').text(titleText);
+  return $('<h4></h4>').text(titleText).addClass('grid-title');
 }
 
 function getMaxDataVal (data) {
