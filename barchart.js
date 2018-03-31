@@ -41,6 +41,26 @@ function createLabelX (entry) {
   return label;
 }
 
+/** Create y-axis grid line
+ *
+ */
+function createGridlinesY (spacing, scale) {
+  var numLines = Math.floor(100.0 / (spacing * scale));
+  var gridlines = [];
+  
+  for (var i = 1; i <= numLines; i++) {
+    // Convert data value to CSS-grid row
+    var row = 101 - (i * spacing * scale);
+    var gridline = $('<div></div>')
+      .addClass('grid-line')
+      .css('gridRow', row + ' / ' + row)
+      .css('gridColumn', '1 / -1')
+      ;
+    gridlines.push(gridline);
+  }
+  return gridlines;
+}
+
 /** Draw the chart area
  *
  */
@@ -62,14 +82,10 @@ function createChartArea (data, options) {
 
     chartArea.append(column, label);
   });
-
-  var gridline = $('<div></div>')
-    .addClass('grid-line')
-    .css('gridRow', '71 / 71')
-    .css('gridColumn', '1 / -1')
-    ;
-
-  chartArea.append(gridline);
+  
+  // Write the grid lines;
+  var gridlines = createGridlinesY(options.gridlineSpacingY, dataScaleFactor);
+  chartArea.append(gridlines);
 
   return chartArea;
 }
