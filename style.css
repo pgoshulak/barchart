@@ -1,14 +1,20 @@
 .grid-container {
   display: inline-grid;
   padding: 20px;
-  background-color: rgb(255, 162, 162);
+  background-color: #EEE;
+  border: 1px solid rgba(0,0,0,0.8);
   grid-row-gap: 0px;
   grid-column-gap: 20px;
-  grid-auto-rows: 1fr;
+  grid-template-rows: repeat(100, 0.5vh) auto;
 }
 
-.grid-item {
-  background-color: rgba(255,255,255,0.8);
+.grid-data {
+  background-color: rgba(255, 0, 0, 0.5);
+  border: 1px solid rgba(0,0,0,0.8);
+}
+
+.grid-label-x {
+  background-color: rgba(0,0,255,0.5);
   border: 1px solid rgba(0,0,0,0.8);
   padding: 20px;
   font-size: 15px;

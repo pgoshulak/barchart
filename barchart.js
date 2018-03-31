@@ -12,6 +12,11 @@ function getMaxDataVal (data) {
   return maxVal;
 }
 
+function getDataScaleFactor (maxDataVal) {
+  // Scale data to fit to 100 rows
+  return 100.0 / maxDataVal;
+}
+
 /** Function to draw the chart area
  *
  */
@@ -21,6 +26,7 @@ function createChartArea (data, options) {
   // Create string for CSS-grid property 'grid-template-columns: auto auto auto...'
   var gridTemplateColumns = '';
   var maxVal = getMaxDataVal(data);
+  var dataScaleFactor = getDataScaleFactor(maxVal);
 
   // Add each data entry
   for (var i = 0; i < data.length; i++) {
@@ -30,12 +36,19 @@ function createChartArea (data, options) {
 
     // Construct the column
     var column = $('<div></div>')
-      .addClass('grid-item')
-      .css('gridRowEnd', (maxVal + 1).toString())
-      .css('gridRowStart', (maxVal + 1 - entry.value).toString())
+      .addClass('grid-data')
+      .css('gridRowStart', (101 - (entry.value * dataScaleFactor)).toString())
+      .css('gridRowEnd', (101).toString())
       ;
 
-    chartArea.append(column);
+    var label = $('<div></div>')
+      .addClass('grid-label-x')
+      .text(entry.label)
+      .css('gridRowStart', (101).toString())
+      .css('gridRowEnd', (102).toString())
+      ;
+
+    chartArea.append(column, label);
   }
 
   chartArea.css('grid-template-columns', gridTemplateColumns);
