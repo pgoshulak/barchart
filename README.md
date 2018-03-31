@@ -8,6 +8,7 @@ An experimental barchart constructed from JS/JQuery, using CSS Grid.
 - parameters
 
 # Issues
+- when col 3 has maximum data value, other col data is 0
 
 # Roadmap
 
