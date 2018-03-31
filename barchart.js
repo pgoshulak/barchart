@@ -27,6 +27,9 @@ function createDataColumn (entry, gridColumnNum, dataScaleFactor) {
     .css('gridRowEnd', (101).toString())
     .css('gridColumn', gridColumnNum + '/' + (gridColumnNum + 1))
     ;
+  if (entry.color) {
+    column.css('backgroundColor', entry.color);
+  }
   return column;
 }
 
