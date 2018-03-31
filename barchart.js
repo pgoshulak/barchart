@@ -16,14 +16,16 @@ function getDataScaleFactor (maxDataVal) {
   // Scale data to fit to 100 rows
   return 100.0 / maxDataVal;
 }
+
 /** Create the data column
  *
  */
-function createDataColumn (entry, dataScaleFactor) {
+function createDataColumn (entry, gridColumnNum, dataScaleFactor) {
   var column = $('<div></div>')
     .addClass('grid-data')
     .css('gridRowStart', (101 - (entry.value * dataScaleFactor)).toString())
     .css('gridRowEnd', (101).toString())
+    .css('gridColumn', gridColumnNum + '/' + (gridColumnNum + 1))
     ;
   return column;
 }
@@ -31,24 +33,25 @@ function createDataColumn (entry, dataScaleFactor) {
 /** Create x-axis data label
  *
  */
-function createLabelX (entry) {
+function createLabelX (entry, gridColumnNum) {
   var label = $('<div></div>')
     .addClass('grid-label-x')
     .text(entry.label)
     .css('gridRowStart', (101).toString())
     .css('gridRowEnd', (102).toString())
+    .css('gridColumn', gridColumnNum + '/' + (gridColumnNum + 1))
     ;
   return label;
 }
 
-/** Create y-axis grid line
+/** Create y-axis grid lines and labels
  *
  */
-function createGridlinesY (spacing, scale) {
+function createGridlinesAndLabelsY (spacing, scale) {
   var numLines = Math.floor(100.0 / (spacing * scale));
   var gridlines = [];
   
-  for (var i = 1; i <= numLines; i++) {
+  for (var i = 0; i <= numLines; i++) {
     // Convert data value to CSS-grid row
     var row = 101 - (i * spacing * scale);
     var gridline = $('<div></div>')
@@ -57,8 +60,29 @@ function createGridlinesY (spacing, scale) {
       .css('gridColumn', '1 / -1')
       ;
     gridlines.push(gridline);
+
+    var dataLabelY = $('<div></div>')
+      .addClass('grid-label-y')
+      .text(i * spacing)
+      .css('gridRow', row + ' / ' + row)
+      .css('gridColumn', '1 / 2')
+      ;
+    gridlines.push(dataLabelY);
   }
   return gridlines;
+}
+
+/** Create y-axis
+ *
+ */
+function createAxisY () {
+  var axisY = $('<div></div>')
+    .addClass('grid-axis-y')
+    .css('gridRow', '1 / -2')
+    .css('gridColumn', '1 / 2')
+    ;
+
+  return axisY;
 }
 
 /** Draw the chart area
@@ -68,23 +92,29 @@ function createChartArea (data, options) {
   // Create grid container
   var chartArea = $('<div></div>')
     .addClass('grid-container')
-    .css('grid-template-columns', 'repeat(' + data.length + ', 1fr)')
+    .css('grid-template-columns', 'auto repeat(' + data.length + ', 1fr)')
     ;
   // Create string for CSS-grid property 'grid-template-columns: auto auto auto...'
   var maxVal = getMaxDataVal(data);
   var dataScaleFactor = getDataScaleFactor(maxVal);
 
+  // Add y-axis
+  var axisY = createAxisY();
+  chartArea.append(axisY);
+
   // Add each data entry
-  data.forEach(function(entry) {
+  for (var i = 0; i < data.length; i++) {
+    var entry = data[i];
+    var gridColumnNum = i + 2;
     // Construct the column and label
-    column = createDataColumn(entry, dataScaleFactor);
-    label = createLabelX(entry);
+    column = createDataColumn(entry, gridColumnNum, dataScaleFactor);
+    label = createLabelX(entry, gridColumnNum);
 
     chartArea.append(column, label);
-  });
+  }
   
   // Write the grid lines;
-  var gridlines = createGridlinesY(options.gridlineSpacingY, dataScaleFactor);
+  var gridlines = createGridlinesAndLabelsY(options.gridlineSpacingY, dataScaleFactor);
   chartArea.append(gridlines);
 
   return chartArea;
