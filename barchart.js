@@ -22,17 +22,17 @@ function getDataScaleFactor (maxDataVal) {
  */
 function createChartArea (data, options) {
   // Create grid container
-  var chartArea = $('<div></div>').addClass('grid-container');
+  var chartArea = $('<div></div>')
+    .addClass('grid-container')
+    .css('grid-template-columns', 'repeat(' + data.length + ', 1fr)')
+    ;
   // Create string for CSS-grid property 'grid-template-columns: auto auto auto...'
-  var gridTemplateColumns = '';
   var maxVal = getMaxDataVal(data);
   var dataScaleFactor = getDataScaleFactor(maxVal);
 
   // Add each data entry
   for (var i = 0; i < data.length; i++) {
     var entry = data[i];
-    // Add a column to the CSS-grid property string
-    gridTemplateColumns += 'auto ';
 
     // Construct the column
     var column = $('<div></div>')
@@ -51,7 +51,6 @@ function createChartArea (data, options) {
     chartArea.append(column, label);
   }
 
-  chartArea.css('grid-template-columns', gridTemplateColumns);
   return chartArea;
 }
 
