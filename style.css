@@ -2,6 +2,9 @@
   display: inline-grid;
   padding: 20px;
   background-color: rgb(255, 162, 162);
+  grid-row-gap: 0px;
+  grid-column-gap: 20px;
+  grid-auto-rows: 1fr;
 }
 
 .grid-item {
