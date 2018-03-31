@@ -16,8 +16,32 @@ function getDataScaleFactor (maxDataVal) {
   // Scale data to fit to 100 rows
   return 100.0 / maxDataVal;
 }
+/** Create the data column
+ *
+ */
+function createDataColumn (entry, dataScaleFactor) {
+  var column = $('<div></div>')
+    .addClass('grid-data')
+    .css('gridRowStart', (101 - (entry.value * dataScaleFactor)).toString())
+    .css('gridRowEnd', (101).toString())
+    ;
+  return column;
+}
 
-/** Function to draw the chart area
+/** Create x-axis data label
+ *
+ */
+function createLabelX (entry) {
+  var label = $('<div></div>')
+    .addClass('grid-label-x')
+    .text(entry.label)
+    .css('gridRowStart', (101).toString())
+    .css('gridRowEnd', (102).toString())
+    ;
+  return label;
+}
+
+/** Draw the chart area
  *
  */
 function createChartArea (data, options) {
@@ -31,25 +55,13 @@ function createChartArea (data, options) {
   var dataScaleFactor = getDataScaleFactor(maxVal);
 
   // Add each data entry
-  for (var i = 0; i < data.length; i++) {
-    var entry = data[i];
-
-    // Construct the column
-    var column = $('<div></div>')
-      .addClass('grid-data')
-      .css('gridRowStart', (101 - (entry.value * dataScaleFactor)).toString())
-      .css('gridRowEnd', (101).toString())
-      ;
-
-    var label = $('<div></div>')
-      .addClass('grid-label-x')
-      .text(entry.label)
-      .css('gridRowStart', (101).toString())
-      .css('gridRowEnd', (102).toString())
-      ;
+  data.forEach(function(entry) {
+    // Construct the column and label
+    column = createDataColumn(entry, dataScaleFactor);
+    label = createLabelX(entry);
 
     chartArea.append(column, label);
-  }
+  });
 
   var gridline = $('<div></div>')
     .addClass('grid-line')
