@@ -33,12 +33,11 @@
 }
 
 .grid-axis-y {
-  /* background-color: rgba(0,255,128,0.5); */
   border-right: 1px solid rgba(0,0,0,0.5);
-  /* width: 70px; */
 }
 
 .grid-label-y {
+  /* Note: this is a hacky way to show axis ticks. Needs fix */
   background-color: rgba(255,255,255,1);
   line-height: 0;
   text-align: right;
