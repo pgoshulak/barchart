@@ -51,6 +51,14 @@ function createChartArea (data, options) {
     chartArea.append(column, label);
   }
 
+  var gridline = $('<div></div>')
+    .addClass('grid-line')
+    .css('gridRow', '71 / 71')
+    .css('gridColumn', '1 / -1')
+    ;
+
+  chartArea.append(gridline);
+
   return chartArea;
 }
 
