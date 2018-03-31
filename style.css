@@ -1,4 +1,4 @@
-.grid-container {
+.grid-chart-area {
   display: grid;
   padding: 20px;
   grid-row-gap: 0px;
@@ -14,7 +14,7 @@
 }
 
 .grid-label-x {
-  padding: 20px;
+  padding: 10px;
   font-size: 15px;
   text-align: center;
 }
@@ -45,5 +45,5 @@
 .grid-title {
   font-size: 24px;
   text-align: center;
-  margin-bottom: 0px;
+  margin: 0px;
 }

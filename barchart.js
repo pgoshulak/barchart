@@ -94,7 +94,7 @@ function createAxisY () {
 function createChartArea (data, options) {
   // Create grid container
   var chartArea = $('<div></div>')
-    .addClass('grid-container')
+    .addClass('grid-chart-area')
     .css('grid-template-columns', 'auto repeat(' + data.length + ', 1fr)')
     ;
   // Create string for CSS-grid property 'grid-template-columns: auto auto auto...'
@@ -126,5 +126,9 @@ function createChartArea (data, options) {
 function barchart(data, options, element) {
   var titleElem = createTitle(options.title);
   var chartElem = createChartArea(data, options);
-  $('#' + element).append(titleElem, chartElem);
+  if (options.titlePosition === 'top') {
+    $('#' + element).append(titleElem, chartElem);
+  } else {
+    $('#' + element).append(chartElem, titleElem);
+  }
 }
