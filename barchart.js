@@ -23,7 +23,7 @@ function getDataScaleFactor (maxDataVal) {
 function createDataColumn (entry, gridColumnNum, dataScaleFactor) {
   var column = $('<div></div>')
     .addClass('grid-data')
-    .css('gridRowStart', (101 - (entry.value * dataScaleFactor)).toString())
+    .css('gridRowStart', Math.floor(101.0 - (entry.value * dataScaleFactor)).toString())
     .css('gridRowEnd', (101).toString())
     .css('gridColumn', gridColumnNum + '/' + (gridColumnNum + 1))
     ;
@@ -39,7 +39,7 @@ function createDataColumn (entry, gridColumnNum, dataScaleFactor) {
 function createLabelX (entry, gridColumnNum) {
   var label = $('<div></div>')
     .addClass('grid-label-x')
-    .text(entry.label)
+    .text(entry.columnLabel)
     .css('gridRowStart', (101).toString())
     .css('gridRowEnd', (102).toString())
     .css('gridColumn', gridColumnNum + '/' + (gridColumnNum + 1))
@@ -56,7 +56,7 @@ function createGridlinesAndLabelsY (spacing, scale) {
   
   for (var i = 0; i <= numLines; i++) {
     // Convert data value to CSS-grid row
-    var row = 101 - (i * spacing * scale);
+    var row = Math.floor(101.0 - (i * spacing * scale));
     var gridline = $('<div></div>')
       .addClass('grid-line')
       .css('gridRow', row + ' / ' + row)
@@ -95,7 +95,7 @@ function createChartArea (data, options) {
   // Create grid container
   var chartArea = $('<div></div>')
     .addClass('grid-chart-area')
-    .css('grid-template-columns', 'auto repeat(' + data.length + ', 1fr)')
+    .css('grid-template-columns', 'auto repeat(' + data.length + ', 1fr) 0')
     ;
   // Create string for CSS-grid property 'grid-template-columns: auto auto auto...'
   var maxVal = getMaxDataVal(data);
