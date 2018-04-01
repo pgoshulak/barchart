@@ -2,11 +2,23 @@ function createTitle (titleText) {
   return $('<h4></h4>').text(titleText).addClass('grid-title');
 }
 
+/** Find the maximum value to be displayed */
 function getMaxDataVal (data) {
-  var maxVal = data[0].value;
+  var maxVal = 0;
   data.forEach(function(entry) {
+    // Check single-bar columns
     if (entry.value > maxVal) {
       maxVal = entry.value;
+
+    } else if (entry.multiValues) {
+      // Check multi-bar columns
+      totalColumnVal = 0;
+      entry.multiValues.forEach(function(singleEntry) {
+        totalColumnVal += singleEntry.value;
+      });
+      if (totalColumnVal > maxVal) {
+        maxVal = totalColumnVal;
+      }
     }
   });
   return maxVal;
@@ -17,20 +29,55 @@ function getDataScaleFactor (maxDataVal) {
   return 100.0 / maxDataVal;
 }
 
+/** Create a single bar of data
+ *
+ */
+function createSingleDataBar (dataEntry, gridPoints) {
+  var dataBar = $('<div></div>')
+  .addClass('grid-data')
+  // .css('gridRowStart', Math.floor(startPoint.gridRow - (entry.value * dataScaleFactor)).toString())
+  // .css('gridRowEnd', (startPoint.gridRow).toString())
+  // .css('gridColumn', startPoint.gridColumn + '/' + (startPoint.gridColumn + 1))
+  .css('gridRowStart', gridPoints.rowTop.toString())
+  .css('gridRowEnd', gridPoints.rowBottom.toString())
+  .css('gridColumn', gridPoints.column + '/' + (gridPoints.column + 1))
+  ;
+  if (dataEntry.color) {
+    dataBar.css('backgroundColor', dataEntry.color);
+  }
+  return dataBar;
+}
+
 /** Create the data column
  *
  */
-function createDataColumn (entry, gridColumnNum, dataScaleFactor) {
-  var column = $('<div></div>')
-    .addClass('grid-data')
-    .css('gridRowStart', Math.floor(101.0 - (entry.value * dataScaleFactor)).toString())
-    .css('gridRowEnd', (101).toString())
-    .css('gridColumn', gridColumnNum + '/' + (gridColumnNum + 1))
-    ;
-  if (entry.color) {
-    column.css('backgroundColor', entry.color);
+function createDataColumn (entry, gridColumn, dataScaleFactor) {
+  // Initialize points on CSS-grid to draw bar
+  var gridPoints = {
+    column: gridColumn,
+    rowBottom: 101,
+    rowTop: null
+  };
+  // If this is a single-bar data entry
+  if (entry.value) {
+    // Calculate top row in CSS-grid (ie. value of data)
+    gridPoints.rowTop = Math.floor(101.0 - entry.value * dataScaleFactor);
+    return createSingleDataBar(entry, gridPoints);
+    
+  } else if (entry.multiValues) {
+    // Else: this is a multi-bar data entry
+    var allDataBars = [];
+    for (var i = 0; i < entry.multiValues.length; i++) {
+      singleEntry = entry.multiValues[i];
+      // Calculate top row in CSS-grid (takes into account previous data points)
+      gridPoints.rowTop = Math.round(gridPoints.rowBottom - singleEntry.value * dataScaleFactor);
+      // Generate the data bar and add it to the list
+      allDataBars.push(createSingleDataBar(singleEntry, gridPoints));
+      // Assign the bottom of next bar as the top of the current bar (to stack)
+      gridPoints.rowBottom = gridPoints.rowTop;
+    }
+    return allDataBars;
   }
-  return column;
 }
 
 /** Create x-axis data label
