@@ -43,9 +43,6 @@ function getDataScaleFactor (maxChartVal) {
 function createSingleDataBar (dataEntry, gridPoints) {
   var dataBar = $('<div></div>')
   .addClass('grid-data')
-  // .css('gridRowStart', Math.floor(startPoint.gridRow - (entry.value * dataScaleFactor)).toString())
-  // .css('gridRowEnd', (startPoint.gridRow).toString())
-  // .css('gridColumn', startPoint.gridColumn + '/' + (startPoint.gridColumn + 1))
   .css('gridRowStart', gridPoints.rowTop.toString())
   .css('gridRowEnd', gridPoints.rowBottom.toString())
   .css('gridColumn', gridPoints.column + '/' + (gridPoints.column + 1))
@@ -120,7 +117,7 @@ function createGridlinesAndLabelsY (spacing, scale) {
     var gridline = $('<div></div>')
       .addClass('grid-line')
       .css('gridRow', row + ' / ' + row)
-      .css('gridColumn', '1 / -1')
+      .css('gridColumn', '2 / -1')
       ;
     gridlines.push(gridline);
 
@@ -142,7 +139,7 @@ function createAxisY () {
   var axisY = $('<div></div>')
     .addClass('grid-axis-y')
     .css('gridRow', '1 / -2')
-    .css('gridColumn', '1 / 2')
+    .css('gridColumn', '2 / 3')
     ;
 
   return axisY;
@@ -155,8 +152,14 @@ function createChartArea (data, options) {
   // Create grid container
   var chartArea = $('<div></div>')
     .addClass('grid-chart-area')
-    .css('grid-template-columns', 'auto repeat(' + data.length + ', 1fr) 0')
+    .css('grid-template-columns', 'auto 0 repeat(' + data.length + ', 1fr) 0')
     ;
+    /* CSS-grid columns are as follows:
+      - auto: y-axis labels
+      - 0: zero-width buffer column, allows y-axis ticks to extend, without overlapping labels
+      - repeat(): each data column, width 1fr (auto-fraction)
+      - 0: zero-width buffer column, allows x-axis to extend past final data bar
+    */
   // Create string for CSS-grid property 'grid-template-columns: auto auto auto...'
   var maxDataVal = getMaxDataVal(data);
   var maxChartVal = getMaxChartVal(maxDataVal, options.gridlineSpacingY);
@@ -169,7 +172,8 @@ function createChartArea (data, options) {
   // Add each data entry
   for (var i = 0; i < data.length; i++) {
     var entry = data[i];
-    var gridColumnNum = i + 2;
+    // Assign starting CSS-grid column (+3 for label and axis; 1-based counting)
+    var gridColumnNum = i + 3;
     // Construct the column and label
     column = createDataColumn(entry, gridColumnNum, dataScaleFactor);
     label = createLabelX(entry, gridColumnNum);

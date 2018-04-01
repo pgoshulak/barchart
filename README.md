@@ -8,7 +8,6 @@ An experimental barchart constructed from JS/JQuery, using CSS Grid.
 - parameters
 
 # Issues
-- Y axis ticks extend through labels
 
 # Roadmap
 
