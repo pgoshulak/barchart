@@ -1,3 +1,5 @@
+var GRID_ROW_BOTTOM = 101.0;
+
 function createTitle (titleText) {
   return $('<h4></h4>').text(titleText).addClass('grid-title');
 }
@@ -55,13 +57,16 @@ function createDataColumn (entry, gridColumn, dataScaleFactor) {
   // Initialize points on CSS-grid to draw bar
   var gridPoints = {
     column: gridColumn,
-    rowBottom: 101,
+    rowBottom: GRID_ROW_BOTTOM,
     rowTop: null
   };
+  var valueTop = 0;
+  var valueBottom = 0;
+
   // If this is a single-bar data entry
   if (entry.value) {
     // Calculate top row in CSS-grid (ie. value of data)
-    gridPoints.rowTop = Math.floor(101.0 - entry.value * dataScaleFactor);
+    gridPoints.rowTop = Math.round(GRID_ROW_BOTTOM - entry.value * dataScaleFactor);
     return createSingleDataBar(entry, gridPoints);
     
   } else if (entry.multiValues) {
@@ -69,12 +74,14 @@ function createDataColumn (entry, gridColumn, dataScaleFactor) {
     var allDataBars = [];
     for (var i = 0; i < entry.multiValues.length; i++) {
       singleEntry = entry.multiValues[i];
-      // Calculate top row in CSS-grid (takes into account previous data points)
-      gridPoints.rowTop = Math.round(gridPoints.rowBottom - singleEntry.value * dataScaleFactor);
+      valueBottom = valueTop;
+      valueTop += singleEntry.value;
+      // Calculate rows in CSS-grid (takes into account previous data points)
+      gridPoints.rowTop = Math.round(GRID_ROW_BOTTOM - valueTop * dataScaleFactor);
+      gridPoints.rowBottom = Math.round(GRID_ROW_BOTTOM - valueBottom * dataScaleFactor);
       // Generate the data bar and add it to the list
       allDataBars.push(createSingleDataBar(singleEntry, gridPoints));
       // Assign the bottom of next bar as the top of the current bar (to stack)
-      gridPoints.rowBottom = gridPoints.rowTop;
     }
     return allDataBars;
   }
@@ -87,8 +94,8 @@ function createLabelX (entry, gridColumnNum) {
   var label = $('<div></div>')
     .addClass('grid-label-x')
     .text(entry.columnLabel)
-    .css('gridRowStart', (101).toString())
-    .css('gridRowEnd', (102).toString())
+    .css('gridRowStart', (GRID_ROW_BOTTOM).toString())
+    .css('gridRowEnd', (GRID_ROW_BOTTOM + 1).toString())
     .css('gridColumn', gridColumnNum + '/' + (gridColumnNum + 1))
     ;
   return label;
@@ -103,7 +110,7 @@ function createGridlinesAndLabelsY (spacing, scale) {
   
   for (var i = 0; i <= numLines; i++) {
     // Convert data value to CSS-grid row
-    var row = Math.floor(101.0 - (i * spacing * scale));
+    var row = Math.round(GRID_ROW_BOTTOM - (i * spacing * scale));
     var gridline = $('<div></div>')
       .addClass('grid-line')
       .css('gridRow', row + ' / ' + row)

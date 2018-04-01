@@ -9,7 +9,7 @@ An experimental barchart constructed from JS/JQuery, using CSS Grid.
 
 # Issues
 - Y axis ticks extend through labels
-- rounding errors accumulate in multi-bar columns (calculate by data val, not grid row)
+- columns extend above chart when y-axis label spacing doesn't divide evenly
 
 # Roadmap
 
