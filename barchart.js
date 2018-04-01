@@ -55,7 +55,7 @@ function createSingleDataBar (dataEntry, gridPoints) {
   var dataLabelContainer = $('<div></div>')
     .addClass('grid-data-label-container')
     .append(dataLabel);
-    
+
   dataBar.append(dataLabelContainer);
 
   return dataBar;
@@ -196,6 +196,21 @@ function createChartArea (data, options) {
   return chartArea;
 }
 
+function createAdditionalCss (options) {
+  var css = $('<style type="text/css"></style>');
+  var additionalCss = '';
+
+  // Align data-labels vertically (default: top)
+  if (options.dataLabelVerticalAlign === 'center') {
+    additionalCss += '.grid-data { align-items: center; }';
+  } else if (options.dataLabelVerticalAlign === 'bottom') {
+    additionalCss += '.grid-data { align-items: end; }';
+  }
+
+  css.html(additionalCss);
+  return css;
+}
+
 function barchart(data, options, element) {
   var titleElem = createTitle(options.title);
   var chartElem = createChartArea(data, options);
@@ -204,4 +219,5 @@ function barchart(data, options, element) {
   } else {
     $('#' + element).append(chartElem, titleElem);
   }
+  $('head').append(createAdditionalCss(options));
 }
