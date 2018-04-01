@@ -42,14 +42,22 @@ function getDataScaleFactor (maxChartVal) {
  */
 function createSingleDataBar (dataEntry, gridPoints) {
   var dataBar = $('<div></div>')
-  .addClass('grid-data')
-  .css('gridRowStart', gridPoints.rowTop.toString())
-  .css('gridRowEnd', gridPoints.rowBottom.toString())
-  .css('gridColumn', gridPoints.column + '/' + (gridPoints.column + 1))
-  ;
+    .addClass('grid-data')
+    .css('gridRowStart', gridPoints.rowTop.toString())
+    .css('gridRowEnd', gridPoints.rowBottom.toString())
+    .css('gridColumn', gridPoints.column + '/' + (gridPoints.column + 1))
+    ;
   if (dataEntry.color) {
     dataBar.css('backgroundColor', dataEntry.color);
   }
+  var dataLabel = $('<div></div>').addClass('grid-data-label').text(dataEntry.value);
+
+  var dataLabelContainer = $('<div></div>')
+    .addClass('grid-data-label-container')
+    .append(dataLabel);
+    
+  dataBar.append(dataLabelContainer);
+
   return dataBar;
 }
 
@@ -121,13 +129,13 @@ function createGridlinesAndLabelsY (spacing, scale) {
       ;
     gridlines.push(gridline);
 
-    var dataLabelY = $('<div></div>')
+    var gridLabelY = $('<div></div>')
       .addClass('grid-label-y')
       .text(i * spacing)
       .css('gridRow', row + ' / ' + row)
       .css('gridColumn', '1 / 2')
       ;
-    gridlines.push(dataLabelY);
+    gridlines.push(gridLabelY);
   }
   return gridlines;
 }

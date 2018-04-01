@@ -12,6 +12,18 @@
   background-color: #F0A;
   margin: 0 10px;
   z-index: 2;
+  display: grid;
+  justify-items: center;
+  /* align-items: center; */
+  /* align-items: end; */
+}
+
+.grid-data-label {
+  margin: 5px 0;
+  padding: 2px 16px;
+  border-radius: 20px;
+  color: #222;
+  background-color: rgba(255,255,255,0.2);
 }
 
 .grid-label-x {
