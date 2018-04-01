@@ -9,7 +9,6 @@ An experimental barchart constructed from JS/JQuery, using CSS Grid.
 
 # Issues
 - Y axis ticks extend through labels
-- columns extend above chart when y-axis label spacing doesn't divide evenly
 
 # Roadmap
 

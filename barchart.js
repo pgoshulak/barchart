@@ -6,11 +6,11 @@ function createTitle (titleText) {
 
 /** Find the maximum value to be displayed */
 function getMaxDataVal (data) {
-  var maxVal = 0;
+  var maxDataVal = 0;
   data.forEach(function(entry) {
     // Check single-bar columns
-    if (entry.value > maxVal) {
-      maxVal = entry.value;
+    if (entry.value > maxDataVal) {
+      maxDataVal = entry.value;
 
     } else if (entry.multiValues) {
       // Check multi-bar columns
@@ -18,17 +18,23 @@ function getMaxDataVal (data) {
       entry.multiValues.forEach(function(singleEntry) {
         totalColumnVal += singleEntry.value;
       });
-      if (totalColumnVal > maxVal) {
-        maxVal = totalColumnVal;
+      if (totalColumnVal > maxDataVal) {
+        maxDataVal = totalColumnVal;
       }
     }
   });
-  return maxVal;
+  return maxDataVal;
 }
 
-function getDataScaleFactor (maxDataVal) {
+/** Find the maximum chart y-axis value (ensure data fits on chart) */
+function getMaxChartVal (maxDataVal, gridlineSpacingY) {
+  return (Math.floor(maxDataVal / gridlineSpacingY) + 1) * gridlineSpacingY;
+}
+
+/** Find conversion factor for data -> CSS grid rows */
+function getDataScaleFactor (maxChartVal) {
   // Scale data to fit to 100 rows
-  return 100.0 / maxDataVal;
+  return 100.0 / maxChartVal;
 }
 
 /** Create a single bar of data
@@ -152,8 +158,9 @@ function createChartArea (data, options) {
     .css('grid-template-columns', 'auto repeat(' + data.length + ', 1fr) 0')
     ;
   // Create string for CSS-grid property 'grid-template-columns: auto auto auto...'
-  var maxVal = getMaxDataVal(data);
-  var dataScaleFactor = getDataScaleFactor(maxVal);
+  var maxDataVal = getMaxDataVal(data);
+  var maxChartVal = getMaxChartVal(maxDataVal, options.gridlineSpacingY);
+  var dataScaleFactor = getDataScaleFactor(maxChartVal);
 
   // Add y-axis
   var axisY = createAxisY();
