@@ -220,6 +220,16 @@ function createAdditionalCss (options, element) {
     additionalCss.push('.grid-data-label { display: none }');
   }
 
+  // Change data label font color
+  if (options.dataLabelFontColor) {
+    additionalCss.push('.grid-data-label { color: ' + options.dataLabelFontColor + ' }');
+  }
+
+  // Change data label background color
+  if (options.dataLabelBgColor) {
+    additionalCss.push('.grid-data-label { background-color: ' + options.dataLabelBgColor + ' }');
+  }
+
   css.html(additionalCss.join(rootElement));
   return css;
 }
