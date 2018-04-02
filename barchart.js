@@ -37,9 +37,7 @@ function getDataScaleFactor (maxChartVal) {
   return 100.0 / maxChartVal;
 }
 
-/** Create a single bar of data
- *
- */
+/** Create a single bar of data */
 function createSingleDataBar (dataEntry, gridPoints) {
   var dataBar = $('<div></div>')
     .addClass('grid-data')
@@ -61,9 +59,7 @@ function createSingleDataBar (dataEntry, gridPoints) {
   return dataBar;
 }
 
-/** Create the data column
- *
- */
+/** Create the data column */
 function createDataColumn (entry, gridColumn, dataScaleFactor) {
   // Initialize points on CSS-grid to draw bar
   var gridPoints = {
@@ -85,7 +81,9 @@ function createDataColumn (entry, gridColumn, dataScaleFactor) {
     var allDataBars = [];
     for (var i = 0; i < entry.multiValues.length; i++) {
       singleEntry = entry.multiValues[i];
+      // Set new bottom as old top (ie. stack this bar above prev bar)
       valueBottom = valueTop;
+      // Calculate top (endpoint) of new bar
       valueTop += singleEntry.value;
       // Calculate rows in CSS-grid (takes into account previous data points)
       gridPoints.rowTop = Math.round(GRID_ROW_BOTTOM - valueTop * dataScaleFactor);
@@ -98,9 +96,7 @@ function createDataColumn (entry, gridColumn, dataScaleFactor) {
   }
 }
 
-/** Create x-axis data label
- *
- */
+/** Create x-axis data labels */
 function createLabelX (entry, gridColumnNum) {
   var label = $('<div></div>')
     .addClass('grid-label-x')
@@ -112,16 +108,17 @@ function createLabelX (entry, gridColumnNum) {
   return label;
 }
 
-/** Create y-axis grid lines and labels
- *
- */
+/** Create y-axis grid lines and labels */
 function createGridlinesAndLabelsY (spacing, scale) {
+  // Number of lines to create
   var numLines = Math.floor(100.0 / (spacing * scale));
   var gridlines = [];
   
   for (var i = 0; i <= numLines; i++) {
     // Convert data value to CSS-grid row
     var row = Math.round(GRID_ROW_BOTTOM - (i * spacing * scale));
+
+    // Create horizontal gridlines
     var gridline = $('<div></div>')
       .addClass('grid-line')
       .css('gridRow', row + ' / ' + row)
@@ -129,6 +126,7 @@ function createGridlinesAndLabelsY (spacing, scale) {
       ;
     gridlines.push(gridline);
 
+    // Create y-axis value labels
     var gridLabelY = $('<div></div>')
       .addClass('grid-label-y')
       .text(i * spacing)
@@ -140,9 +138,7 @@ function createGridlinesAndLabelsY (spacing, scale) {
   return gridlines;
 }
 
-/** Create y-axis
- *
- */
+/** Create y-axis */
 function createAxisY () {
   var axisY = $('<div></div>')
     .addClass('grid-axis-y')
@@ -153,9 +149,7 @@ function createAxisY () {
   return axisY;
 }
 
-/** Draw the chart area
- *
- */
+/** Draw the chart area */
 function createChartArea (data, options) {
   // Create grid container
   var chartArea = $('<div></div>')
@@ -196,6 +190,7 @@ function createChartArea (data, options) {
   return chartArea;
 }
 
+/** Write additional CSS rules from 'options' object */
 function createAdditionalCss (options, element) {
   var css = $('<style type="text/css"></style>');
   var rootElement = ' #' + element + ' ';
