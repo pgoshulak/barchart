@@ -12,6 +12,7 @@
 </head>
 <body>
   <div id="barchart-1"></div>
+  <div id="barchart-2"></div>
 </body>
 <script>
   const DATASCALE = 10;
@@ -69,8 +70,70 @@
     title: 'Bar chart',
     titlePosition: 'top',
     gridlineSpacingY: 1 * DATASCALE,
-    dataLabelVerticalAlign: 'center'
+    dataLabelVerticalAlign: 'center',
+    barSpacing: '30px',
+    showDataValueLabels: true
   },
-  'barchart-1')
+  'barchart-1');
+
+  barchart([
+    {
+      columnLabel: 'Alpha',
+      value: 1 * DATASCALE
+    },
+    {
+      columnLabel: 'Bravo',
+      multiValues: [
+        {
+          value: 1 * DATASCALE,
+          color: '#0FA'
+        },
+        {
+          value: 1 * DATASCALE,
+          color: '#A0F'
+        },
+        {
+          value: 1 * DATASCALE,
+          color: '#FA0'
+        }
+      ]
+    },
+    {
+      columnLabel: 'Charlie',
+      value: 6 * DATASCALE,
+      color: '#0AF'
+    },
+    {
+      columnLabel: 'Delta',
+      value: 2 * DATASCALE,
+      color: '#AF0'
+    },
+    {
+      columnLabel: 'Echo',
+      multiValues: [
+        {
+          value: 1 * DATASCALE
+        },
+        {
+          value: 1 * DATASCALE
+        },
+        {
+          value: 1 * DATASCALE
+        },
+        {
+          value: 1 * DATASCALE
+        },
+      ]
+    },
+  ],
+  {
+    title: 'Bar chart defaults',
+    titlePosition: 'bottom',
+    gridlineSpacingY: 1 * DATASCALE,
+    // dataLabelVerticalAlign: 'center',
+    // barSpacing: '20px',
+    // showDataValueLabels: false
+  },
+  'barchart-2')
 </script>
 </html>

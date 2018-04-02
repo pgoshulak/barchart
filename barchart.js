@@ -196,28 +196,41 @@ function createChartArea (data, options) {
   return chartArea;
 }
 
-function createAdditionalCss (options) {
+function createAdditionalCss (options, element) {
   var css = $('<style type="text/css"></style>');
-  var additionalCss = '';
+  var rootElement = ' #' + element + ' ';
+  // List of extra CSS rules to apply (each prefixed with rootElement to specify *this* chart)
+  // Note: array begins with '' to allow array.join() to result with rootElement as start
+  var additionalCss = [''];
 
   // Align data-labels vertically (default: top)
   if (options.dataLabelVerticalAlign === 'center') {
-    additionalCss += '.grid-data { align-items: center; }';
+    additionalCss.push('.grid-data { align-items: center; }');
   } else if (options.dataLabelVerticalAlign === 'bottom') {
-    additionalCss += '.grid-data { align-items: end; }';
+    additionalCss.push('.grid-data { align-items: end; }');
   }
 
-  css.html(additionalCss);
+  // Set width of gap between bars (default: 10px)
+  if (options.barSpacing) {
+    additionalCss.push('.grid-data { margin: 0 ' + options.barSpacing + '; }');
+  }
+
+  // Show/hide data value labels (default: true, ie. show)
+  if (options.showDataValueLabels === false) {
+    additionalCss.push('.grid-data-label { display: none }');
+  }
+
+  css.html(additionalCss.join(rootElement));
   return css;
 }
 
 function barchart(data, options, element) {
   var titleElem = createTitle(options.title);
   var chartElem = createChartArea(data, options);
-  if (options.titlePosition === 'top') {
-    $('#' + element).append(titleElem, chartElem);
-  } else {
+  if (options.titlePosition === 'bottom') {
     $('#' + element).append(chartElem, titleElem);
+  } else {
+    $('#' + element).append(titleElem, chartElem);
   }
-  $('head').append(createAdditionalCss(options));
+  $('head').append(createAdditionalCss(options, element));
 }
