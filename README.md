@@ -10,6 +10,10 @@ An experimental barchart constructed from JS/JQuery, using CSS Grid.
 # Issues
 
 # Roadmap
+- custom chart sizing
+- data description labels (ie. to indicate meanings of multi-bar)
+- data label colours
+- chart title font size, colour
 
 # External Resources Consulted
 - http://learn.jquery.com
