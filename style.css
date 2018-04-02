@@ -14,18 +14,26 @@
   z-index: 2;
   display: grid;
   justify-items: center;
+  align-items: start;
   /* align-items: center; */
   /* align-items: end; */
 }
 
-.grid-data-label {
+.grid-data-label-container {
   margin: 5px 0;
   padding: 2px 16px;
   border-radius: 20px;
   color: #222;
   background-color: rgba(255,255,255,0.2);
   font-family: 'Roboto', sans-serif;
+  text-align: center;
+}
+
+.grid-data-value-label {
   font-size: 0.8em;
+}
+.grid-data-description {
+  font-size: 0.7em;
 }
 
 .grid-label-x {

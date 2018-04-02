@@ -48,11 +48,20 @@ function createSingleDataBar (dataEntry, gridPoints) {
   if (dataEntry.color) {
     dataBar.css('backgroundColor', dataEntry.color);
   }
-  var dataLabel = $('<div></div>').addClass('grid-data-label').text(dataEntry.value);
+  var dataLabel = $('<div></div>').addClass('grid-data-value-label').text(dataEntry.value);
 
+  
   var dataLabelContainer = $('<div></div>')
-    .addClass('grid-data-label-container')
-    .append(dataLabel);
+  .addClass('grid-data-label-container')
+  .append(dataLabel)
+  ;
+  
+  if (dataEntry.description) {
+    var dataDescription = $('<div></div>')
+      .addClass('grid-data-description')
+      .text(dataEntry.description);
+    dataLabelContainer.append(dataDescription);
+  }
 
   dataBar.append(dataLabelContainer);
 
@@ -198,7 +207,7 @@ function createAdditionalCss (options, element) {
   // Note: array begins with '' to allow array.join() to result with rootElement as start
   var additionalCss = [''];
 
-  // Align data-labels vertically (default: top)
+  // Align data-labels vertically (default: start, ie. top)
   if (options.dataLabelVerticalAlign === 'center') {
     additionalCss.push('.grid-data { align-items: center; }');
   } else if (options.dataLabelVerticalAlign === 'bottom') {
@@ -212,7 +221,12 @@ function createAdditionalCss (options, element) {
 
   // Show/hide data value labels (default: true, ie. show)
   if (options.showDataValueLabels === false) {
-    additionalCss.push('.grid-data-label { display: none }');
+    additionalCss.push('.grid-data-value-label { display: none }');
+  }
+
+  // Show/hide data value labels (default: true, ie. show)
+  if (options.showDataDescriptions === false) {
+    additionalCss.push('.grid-data-description { display: none }');
   }
 
   // Change data label font color (default: #222)
