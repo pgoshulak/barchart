@@ -220,14 +220,24 @@ function createAdditionalCss (options, element) {
     additionalCss.push('.grid-data-label { display: none }');
   }
 
-  // Change data label font color
+  // Change data label font color (default: #222)
   if (options.dataLabelFontColor) {
     additionalCss.push('.grid-data-label { color: ' + options.dataLabelFontColor + ' }');
   }
 
-  // Change data label background color
+  // Change data label background color (default: rgba(255,255,255,0.2))
   if (options.dataLabelBgColor) {
     additionalCss.push('.grid-data-label { background-color: ' + options.dataLabelBgColor + ' }');
+  }
+
+  // Change chart title font color (default: #222)
+  if (options.titleFontColor) {
+    additionalCss.push('.grid-title { color: ' + options.titleFontColor + ' }');
+  }
+
+  // Change chart title font size (default: 24px)
+  if (options.titleFontSize) {
+    additionalCss.push('.grid-title { font-size: ' + options.titleFontSize + ' }');
   }
 
   css.html(additionalCss.join(rootElement));
