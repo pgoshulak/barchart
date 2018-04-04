@@ -7,8 +7,11 @@ This project began as an assignment for the Lighthouse Labs bootcamp's Web Devel
 # Usage
 ## Setup
 Simply save `barchart.js` and `barchart.css` into your project to install the necessary files.
-Call the `barchart(data, options, element)` function from within any `<script>` tag and the chart will render to the DOM element specified.
+Call the following function from within any `<script>` tag and the chart will render to the DOM element specified:
 
+```javascript
+barchart(data, options, element)
+```
 
 ## Parameters
 ### Chart `data`
@@ -19,7 +22,7 @@ Each data object within the array has the following properties:
 
 To create a simple bar (only one value), use the following properties:
 - `value` (Integer/Float): the data amount
-- `color` (String, *optional, default `#F0A`*): the bar's color. Can be given as hex value (eg. `'#FA0'`), HTML color name (eg. `'red'`), `'rgba()'`, `'hsla()'`, etc
+- `color` (String, *optional, default:* `#F0A`): the bar's color. Can be given as hex value (eg. `'#FA0'`), HTML color name (eg. `'red'`), `'rgba()'`, `'hsla()'`, etc
 - `description` (String, *optional*): the text displayed inside the bar (mostly used for multi-bar columns)
 
 To create a multi-bar column (ie. stacked bars), substitute the above `value` property for the following:
@@ -29,9 +32,21 @@ To create a multi-bar column (ie. stacked bars), substitute the above `value` pr
 Chart axes are automatically generated based on the data given (ie. number of columns, maximum value)
 
 
-
 ### Chart `options`
-Display options are specific as a single object
+`options` are specified as a single object with the following properties. **All parameters are optional**.
+
+- `title` (String): The chart's title text
+- `titleFontColor` (String, *default* `'#222'`): Title font color
+- `titleFontSize` (String, *default* `'24px'`): Title font size
+- `titlePosition` (String, *default:* `'top'`): The title's position. can be `'top'` or `'bottom'`
+- `gridlineSpacingY` (Integer/Float): the separation between horizontal lines and y-axis tick labels. If not given, no lines will show except top line
+- `barSpacing` (String, *default* `'10px'`): Horizontal padding between bars
+- `showDataValueLabels` (Boolean, *default* `true`): Show the bar's numeric value inside the bar
+- `showDataDescriptions` (Boolean, *default* `true`): Show the bar's description (if given) inside the bar
+- `dataLabelFontColor` (String, *default* `'#222'`): The label's font color
+- `dataLabelBgColor` (String, *default* `'#rgba(255,255,255,0.2)'`): The label's background color
+- `dataLabelVerticalAlign` (String, *default* `'top'`): The placement of the data label within the bar. Can be `'top'`, `'center'`, or `'bottom'`
+
 
 ### Chart `element`
 Id of the element where the chart will be rendered
