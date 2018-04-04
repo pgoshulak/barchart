@@ -1,5 +1,6 @@
 # About
-An experimental barchart constructed from JS/JQuery, using CSS Grid.
+An experimental barchart constructed from JS/JQuery, using CSS Grid. It is a simple embeddable package which provides many options for displaying basic and stackable bar charts.
+This project began as an assignment for the Lighthouse Labs bootcamp's Web Development prep course. 
 
 # Screenshots
 
@@ -10,7 +11,9 @@ An experimental barchart constructed from JS/JQuery, using CSS Grid.
 # Issues
 
 # Roadmap
-- custom chart sizing
+- custom chart element sizing
+- scale data to 100% chart height
+- build-step minification for distribution
 
 # External Resources Consulted
 - http://learn.jquery.com
