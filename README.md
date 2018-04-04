@@ -11,7 +11,6 @@ An experimental barchart constructed from JS/JQuery, using CSS Grid.
 
 # Roadmap
 - custom chart sizing
-- data description labels (ie. to indicate meanings of multi-bar)
 
 # External Resources Consulted
 - http://learn.jquery.com
