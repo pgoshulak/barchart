@@ -160,20 +160,29 @@ function createAxisY () {
 
 /** Draw the chart area */
 function createChartArea (data, options) {
+  
   // Create grid container
   var chartArea = $('<div></div>')
-    .addClass('grid-chart-area')
-    .css('grid-template-columns', 'auto 0 repeat(' + data.length + ', 1fr) 0')
-    ;
-    /* CSS-grid columns are as follows:
-      - auto: y-axis labels
-      - 0: zero-width buffer column, allows y-axis ticks to extend, without overlapping labels
-      - repeat(): each data column, width 1fr (auto-fraction)
-      - 0: zero-width buffer column, allows x-axis to extend past final data bar
-    */
+  .addClass('grid-chart-area')
+  .css('grid-template-columns', 'auto 0 repeat(' + data.length + ', 1fr) 0')
+  ;
+  /* CSS-grid columns are as follows:
+  - auto: y-axis labels
+  - 0: zero-width buffer column, allows y-axis ticks to extend, without overlapping labels
+  - repeat(): each data column, width 1fr (auto-fraction)
+  - 0: zero-width buffer column, allows x-axis to extend past final data bar
+  */
+
   // Create string for CSS-grid property 'grid-template-columns: auto auto auto...'
   var maxDataVal = getMaxDataVal(data);
-  var maxChartVal = getMaxChartVal(maxDataVal, options.gridlineSpacingY);
+  // Error-checking gridline spacing
+  var gridlineSpacingYClean;
+  if (!options.gridlineSpacingY) {
+    gridlineSpacingYClean = maxDataVal * 1.1;
+  } else {
+    gridlineSpacingYClean = options.gridlineSpacingY;
+  }
+  var maxChartVal = getMaxChartVal(maxDataVal, gridlineSpacingYClean);
   var dataScaleFactor = getDataScaleFactor(maxChartVal);
 
   // Add y-axis
@@ -193,7 +202,7 @@ function createChartArea (data, options) {
   }
   
   // Write the grid lines;
-  var gridlines = createGridlinesAndLabelsY(options.gridlineSpacingY, dataScaleFactor);
+  var gridlines = createGridlinesAndLabelsY(gridlineSpacingYClean, dataScaleFactor);
   chartArea.append(gridlines);
 
   return chartArea;
