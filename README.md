@@ -22,7 +22,7 @@ Each data object within the array has the following properties:
 
 To create a simple bar (only one value), use the following properties:
 - `value` (Integer/Float): the data amount
-- `color` (String, *optional, default:* `#F0A`): the bar's color. Can be given as hex value (eg. `'#FA0'`), HTML color name (eg. `'red'`), `'rgba()'`, `'hsla()'`, etc
+- `color` (String, *optional, default:* `#0AF`): the bar's color. Can be given as hex value (eg. `'#FA0'`), HTML color name (eg. `'red'`), `'rgba()'`, `'hsla()'`, etc
 - `description` (String, *optional*): the text displayed inside the bar (mostly used for multi-bar columns)
 
 To create a multi-bar column (ie. stacked bars), substitute the above `value` property for the following:
