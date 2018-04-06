@@ -138,7 +138,7 @@ function createGridlinesAndLabelsY (spacing, scale) {
     // Create y-axis value labels
     var gridLabelY = $('<div></div>')
       .addClass('grid-label-y')
-      .text(i * spacing)
+      .text((i * spacing).toFixed(0))
       .css('gridRow', row + ' / ' + row)
       .css('gridColumn', '1 / 2')
       ;
