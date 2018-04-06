@@ -59,6 +59,7 @@ ie. `element = 'barchart-1'` will render to `<div #barchart-1>`
 - custom chart element sizing
 - scale data to 100% chart height
 - build-step minification for distribution
+- prefix/suffix units for y-axis labels
 
 # External Resources Consulted
 - http://learn.jquery.com
