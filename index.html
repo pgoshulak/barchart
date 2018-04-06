@@ -8,142 +8,60 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="dist/barchart.js"></script>
   <link rel="stylesheet" href="dist/barchart.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="prism.css">
+  <script src="prism.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 <body>
-  <div id="barchart-1"></div>
-  <div id="barchart-2"></div>
-</body>
-<script>
-  const DATASCALE = 10;
-  barchart([
-    {
-      columnLabel: 'Alpha',
-      value: 1 * DATASCALE
-    },
-    {
-      columnLabel: 'Bravo',
-      multiValues: [
-        {
-          value: 1 * DATASCALE,
-          color: '#0FA',
-          description: 'I am green'
-        },
-        {
-          value: 1 * DATASCALE,
-          color: '#A0F',
-          description: 'Je suis violet'
-        },
-        {
-          value: 1 * DATASCALE,
-          color: '#FA0',
-          description: 'Ich bin gelb'
-        }
-      ]
-    },
-    {
-      columnLabel: 'Charlie',
-      value: 6 * DATASCALE,
-      color: '#0AF',
-      description: 'Sono azuro'
-    },
-    {
-      columnLabel: 'Delta',
-      value: 2 * DATASCALE,
-      color: '#AF0'
-    },
-    {
-      columnLabel: 'Echo',
-      multiValues: [
-        {
-          value: 1 * DATASCALE
-        },
-        {
-          value: 1 * DATASCALE
-        },
-        {
-          value: 1 * DATASCALE
-        },
-        {
-          value: 1 * DATASCALE
-        },
-      ]
-    },
-  ],
-  {
-    title: 'Bar chart with Options',
-    titlePosition: 'top',
-    gridlineSpacingY: 1 * DATASCALE,
-    dataLabelVerticalAlign: 'center',
-    barSpacing: '30px',
-    showDataValueLabels: true,
-    showDataDescriptions: true,
-    dataLabelFontColor: '#DDF',
-    dataLabelBgColor: 'rgba(0,0,0,0.3)',
-    titleFontColor: '#0AF',
-    titleFontSize: '20px'
-  },
-  'barchart-1');
+  <h1>Barchart samples</h1>
+  <p>Below you will find some examples of barchart.js in use.
+    For full documentation, please see the 
+    <a href="https://github.com/pgoshulak/barchart/blob/master/README.md">readme</a>
+    page on the github repo.
+  </p>
 
-  barchart([
-    {
-      columnLabel: 'Alpha',
-      value: 1 * DATASCALE
-    },
-    {
-      columnLabel: 'Bravo',
-      multiValues: [
-        {
-          value: 1 * DATASCALE,
-          color: '#0FA',
-          description: 'test'
-        },
-        {
-          value: 1 * DATASCALE,
-          color: '#A0F'
-        },
-        {
-          value: 1 * DATASCALE,
-          color: '#FA0'
-        }
-      ]
-    },
-    {
-      columnLabel: 'Charlie',
-      value: 6 * DATASCALE,
-      color: '#0AF'
-    },
-    {
-      columnLabel: 'Delta',
-      value: 2 * DATASCALE,
-      color: '#AF0'
-    },
-    {
-      columnLabel: 'Echo',
-      multiValues: [
-        {
-          value: 1 * DATASCALE
-        },
-        {
-          value: 1 * DATASCALE
-        },
-        {
-          value: 1 * DATASCALE
-        },
-        {
-          value: 1 * DATASCALE
-        },
-      ]
-    },
-  ],
-  {
-    title: 'Bar chart defaults',
-    // titlePosition: 'top',
-    // gridlineSpacingY: 1 * DATASCALE,
-    // dataLabelVerticalAlign: 'center',
-    // barSpacing: '20px',
-    // showDataValueLabels: false
-  },
-  'barchart-2')
-</script>
+  <div id="samples-container">
+    <div class="section-left">
+      <h2>Basic Usage</h2>
+      <p>
+        A basic barchart is formed like this:
+      </p>
+      <pre><code id="barchart-basic-code" class="language-js">
+      </code></pre>
+    </div>
+    <div class="section-right">
+      <div id="barchart-basic"></div>
+    </div>
+
+    <div class="section-left">
+      <h2>Colored barcharts</h2>
+      <p>
+        Many aspects of the barchart can be colored:
+      </p>
+      <pre><code id="barchart-colored-code" class="language-js">
+      </code></pre>
+    </div>
+    <div class="section-right">
+      <div id="barchart-colored"></div>
+    </div>
+
+    <div class="section-left">
+      <h2>Multi-bar charts</h2>
+      <p>
+        You can have multi-bar columns mixed in with regular columns:
+      </p>
+      <pre><code id="barchart-multi-code" class="language-js">
+      </code></pre>
+    </div>
+    <div class="section-right">
+      <div id="barchart-multi"></div>
+    </div>
+
+  </div>
+
+  <!-- <div id="barchart-1"></div>
+  <div id="barchart-2"></div> -->
+</body>
+<script src="samples.js"></script>
 </html>

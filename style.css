@@ -1,0 +1,10 @@
+#samples-container {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.section-left, .section-right {
+  align-items: center;
+  justify-items: center;
+  /* border: 1px solid red; */
+}
