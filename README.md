@@ -10,7 +10,11 @@ This project began as an assignment for the Lighthouse Labs bootcamp's Web Devel
 
 # Usage
 ## Setup
-Simply save `barchart.js` and `barchart.css` into your project to install the necessary files.
+Simply save `barchart.js` and `barchart.css` from the `dist/` folder into your project to install the necessary files. Place the following lines in your page's `<head>`:
+```html
+<script src="barchart.js"></script>
+<link rel="stylesheet" href="barchart.css">
+  ```
 Call the following function from within any `<script>` tag and the chart will render to the DOM element specified:
 
 ```javascript
