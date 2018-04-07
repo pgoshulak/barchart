@@ -3,6 +3,10 @@ An experimental barchart constructed from JS/JQuery, using CSS Grid. It is a sim
 This project began as an assignment for the Lighthouse Labs bootcamp's Web Development prep course. 
 
 # Screenshots
+![alt text](./img/basic.png "Basic barchart")
+![alt text](./img/colored.png "Colored barchart")
+![alt text](./img/multi.png "Multi-bar barchart")
+![alt text](./img/unlabelled.png "Unlabelled barchart")
 
 # Usage
 ## Setup
