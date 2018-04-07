@@ -40,7 +40,6 @@ var colored = `barchart([
     title: 'Colored Barchart',
     titleFontColor: 'hsl(128,100%,40%)',
     titleFontSize: '32px',
-    titlePosition: 'bottom',
     dataLabelFontColor: '#0FF',
     dataLabelBgColor: 'rgba(128,0,0,0.3)',
     gridlineSpacingY: 10,
