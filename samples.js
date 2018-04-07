@@ -29,16 +29,20 @@ var colored = `barchart([
     {
       columnLabel: 'Batman',
       value: 53,
-      color: '#05A'
+      color: 'rgba(0,64,128,0.8)'
     },
     {
       columnLabel: 'Captain America',
       value: 45,
-      color: 'rgb(255,0,0)'
+      color: 'linear-gradient(red,white,blue)'
     },  
   ], {
     title: 'Colored Barchart',
     titleFontColor: 'hsl(128,100%,40%)',
+    titleFontSize: '32px',
+    titlePosition: 'bottom',
+    dataLabelFontColor: '#0FF',
+    dataLabelBgColor: 'rgba(128,0,0,0.3)',
     gridlineSpacingY: 10,
     dataLabelVerticalAlign: 'bottom'
   }, 'barchart-colored');`
@@ -50,8 +54,7 @@ var multi = `barchart([
         {
           value: 5,
           description: 'English'
-        },
-        {
+        },{
           value: 3,
           color: '#FA0',
           description: 'German'
@@ -64,13 +67,11 @@ var multi = `barchart([
         {
           value: 2,
           description: 'French'
-        },
-        {
+        },{
           value: 1,
           color: '#0FA',
           description: 'Italian'
-        },
-        {
+        },{
           value: 3,
           color: '#FA0',
           description: 'Spanish'
@@ -87,7 +88,35 @@ var multi = `barchart([
     dataLabelVerticalAlign: 'center',
   }, 'barchart-multi');`
 
-
+var nolabel = `barchart([
+  {
+    columnLabel: 'MTL', value: 24
+  },
+  {
+    columnLabel: 'TOR', value: 13
+  },
+  {
+    columnLabel: 'DET', value: 11
+  },
+  {
+    columnLabel: 'BOS', value: 6
+  },
+  {
+    columnLabel: 'CHI', value: 6
+  },
+  {
+    columnLabel: 'PIT', value: 5
+  },
+  {
+    columnLabel: 'EDM', value: 5
+  } 
+], {
+  title: 'Unlabelled Barchart',
+  gridlineSpacingY: 5,
+  showDataValueLabels: false,
+  showDataDescriptions: false,
+  barSpacing: '1px',
+}, 'barchart-nolabel');`
 var full = `barchart([{
     columnLabel: 'Alpha',
     value: 1
@@ -153,6 +182,8 @@ var full = `barchart([{
   },
   'barchart-full');`
 
+// Render the sample code and charts
+
 eval(basic);
 $('#barchart-basic-code').text(basic);
 
@@ -161,3 +192,6 @@ $('#barchart-colored-code').text(colored);
 
 eval(multi);
 $('#barchart-multi-code').text(multi);
+
+eval(nolabel);
+$('#barchart-nolabel-code').text(nolabel);

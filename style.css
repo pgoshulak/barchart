@@ -3,8 +3,12 @@
   grid-template-columns: auto auto;
 }
 
-.section-left, .section-right {
+.section-info, .section-chart {
   align-items: center;
   justify-items: center;
   /* border: 1px solid red; */
+}
+
+.section-chart {
+  padding-top: 3em;
 }
