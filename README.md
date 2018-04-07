@@ -14,7 +14,7 @@ Simply save `barchart.js` and `barchart.css` into your project to install the ne
 Call the following function from within any `<script>` tag and the chart will render to the DOM element specified:
 
 ```javascript
-barchart(data, options, element)
+drawBarChart(data, options, element)
 ```
 
 ## Parameters

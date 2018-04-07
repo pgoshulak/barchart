@@ -1,4 +1,4 @@
-var basic = `barchart([
+var basic = `drawBarChart([
     {
       columnLabel: 'Apples',
       value: 22
@@ -20,7 +20,7 @@ var basic = `barchart([
     gridlineSpacingY: 5,
   }, 'barchart-basic');`
 
-var colored = `barchart([
+var colored = `drawBarChart([
     {
       columnLabel: 'Aquaman',
       value: 15,
@@ -46,7 +46,7 @@ var colored = `barchart([
     dataLabelVerticalAlign: 'bottom'
   }, 'barchart-colored');`
 
-var multi = `barchart([
+var multi = `drawBarChart([
     {
       columnLabel: 'Germanic',
       multiValues: [
@@ -87,7 +87,7 @@ var multi = `barchart([
     dataLabelVerticalAlign: 'center',
   }, 'barchart-multi');`
 
-var nolabel = `barchart([
+var nolabel = `drawBarChart([
   {
     columnLabel: 'MTL', value: 24
   },
@@ -116,7 +116,7 @@ var nolabel = `barchart([
   showDataDescriptions: false,
   barSpacing: '1px',
 }, 'barchart-nolabel');`
-var full = `barchart([{
+var full = `drawBarChart([{
     columnLabel: 'Alpha',
     value: 1
   },

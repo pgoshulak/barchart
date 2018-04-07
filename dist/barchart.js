@@ -267,7 +267,7 @@ function createAdditionalCss (options, element) {
   return css;
 }
 
-function barchart(data, options, element) {
+function drawBarChart(data, options, element) {
   var titleElem = createTitle(options.title);
   var chartElem = createChartArea(data, options);
   if (options.titlePosition === 'bottom') {
