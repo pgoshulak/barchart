@@ -53,7 +53,7 @@ Id of the element where the chart will be rendered
 ie. `element = 'barchart-1'` will render to `<div #barchart-1>`
 
 # Issues
-- Rounding error on auto-calculated (default) y-axis label (eg. '6.6' shows '6.60000005') -> TEMP FIX: auto-round to zero decimal points
+- y-axis labels cannot format decimals/exponentials
 
 # Roadmap
 - custom chart element sizing
