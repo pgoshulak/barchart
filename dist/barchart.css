@@ -9,7 +9,7 @@
 }
 
 .grid-data {
-  background-color: #0AF;
+  background: #0AF;
   margin: 0 10px;
   z-index: 2;
   display: grid;
@@ -24,7 +24,7 @@
   padding: 2px 16px;
   border-radius: 20px;
   color: #222;
-  background-color: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.2);
   font-family: 'Roboto', sans-serif;
   text-align: center;
 }

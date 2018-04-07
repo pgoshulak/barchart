@@ -46,7 +46,7 @@ function createSingleDataBar (dataEntry, gridPoints) {
     .css('gridColumn', gridPoints.column + '/' + (gridPoints.column + 1))
     ;
   if (dataEntry.color) {
-    dataBar.css('backgroundColor', dataEntry.color);
+    dataBar.css('background', dataEntry.color);
   }
   var dataLabel = $('<div></div>').addClass('grid-data-value-label').text(dataEntry.value);
 
@@ -238,14 +238,19 @@ function createAdditionalCss (options, element) {
     additionalCss.push('.grid-data-description { display: none }');
   }
 
+  // Show/hide data label containers
+  if (options.showDataValueLabels === false && options.showDataDescriptions === false) {
+    additionalCss.push('.grid-data-label-container { display: none }');
+  }
+
   // Change data label font color (default: #222)
   if (options.dataLabelFontColor) {
-    additionalCss.push('.grid-data-label { color: ' + options.dataLabelFontColor + ' }');
+    additionalCss.push('.grid-data-label-container { color: ' + options.dataLabelFontColor + ' }');
   }
 
   // Change data label background color (default: rgba(255,255,255,0.2))
   if (options.dataLabelBgColor) {
-    additionalCss.push('.grid-data-label { background-color: ' + options.dataLabelBgColor + ' }');
+    additionalCss.push('.grid-data-label-container { background: ' + options.dataLabelBgColor + ' }');
   }
 
   // Change chart title font color (default: #222)
